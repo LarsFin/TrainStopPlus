@@ -13,5 +13,5 @@ g++ -std=c++11 test/test_runner.cpp -o bin/test.out -Wall -Wextra -Wshadow -Wnon
 # Modify execution permissions of file
 chmod 700 bin/test.out
 
-# Execute compiled machine code to test project
+# Execute compiled machine code to test project (this will run compiled code from last time irrelevant of compilation errors!)
 bin/test.out

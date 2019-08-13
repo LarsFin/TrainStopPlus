@@ -6,7 +6,7 @@ Managed to write a test which fails depending on `Train` source files but someth
 
 ## User Stories
 
-Trains have names [ ]
+Trains have names [✓]
 ```
 As a Train Manager,
 So I can easily refer to my train,
