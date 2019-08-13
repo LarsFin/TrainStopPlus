@@ -8,7 +8,9 @@ public:
   Train(string name);
 
   string GetName();
+  bool IsMoving();
 
 private:
   string name;
+  bool isMoving = false;
 };

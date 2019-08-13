@@ -11,3 +11,9 @@ string Train::GetName()
 {
   return name;
 }
+
+// Getter for state of motion of Train
+bool Train::IsMoving()
+{
+  return isMoving;
+}
