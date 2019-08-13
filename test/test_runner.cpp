@@ -1,5 +1,11 @@
 #define CATCH_CONFIG_MAIN
+
 #include <catch2/catch.hpp>
+#include <string>
+
+#include "Train_tests.hpp"
+
+using namespace std;
 
 void Increment(int& number)
 {

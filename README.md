@@ -2,6 +2,8 @@
 
 Using C++ to develop the **Train Stop** use case, including simple OOP development as well as TDD.
 
+Managed to write a test which fails depending on `Train` source files but something isn't right about it. To my knowledge, you shouldn't use `#include` to pull in `.cpp` files, will have to look into it.
+
 ## User Stories
 
 Trains have names [ ]

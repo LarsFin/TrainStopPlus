@@ -7,5 +7,5 @@ then
   mkdir bin
 fi
 
-g++ -std=c++11 test/BasicTest.cpp -o bin/test.out -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
+g++ -std=c++11 test/test_runner.cpp -o bin/test.out -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
 chmod 700 bin/test.out
