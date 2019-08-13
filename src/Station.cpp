@@ -3,7 +3,7 @@
 // Station Constructor
 Station::Station(string name)
 {
-
+  this->name = name;
 }
 
 // Getter for the name attribute
