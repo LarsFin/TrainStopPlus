@@ -8,7 +8,9 @@ public:
   Station(string name);
 
   string GetName();
+  list<Train*> GetTrainPtrs();
 
 private:
   string name;
+  list<Train*> trainPtrs;
 };

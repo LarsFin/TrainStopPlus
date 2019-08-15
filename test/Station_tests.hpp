@@ -11,6 +11,11 @@ Station* BuildStation(string name);
 // Deallocate heap pointer
 void DeallocateStationPtr(Station* stationPtr);
 
+
+//############################################################################//
+// Station Tests
+//############################################################################//
+
 TEST_CASE( "Station is instantiated with passed name", "[Station]" )
 {
   string expectedName("Waterloo");
@@ -18,6 +23,18 @@ TEST_CASE( "Station is instantiated with passed name", "[Station]" )
   REQUIRE( stationPtr->GetName() == expectedName );
   DeallocateStationPtr(stationPtr);
 }
+
+TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs]" )
+{
+  Station* stationPtr = BuildStation();
+  list<Train*>* expectedTypePtr = new list<Train*>;
+  REQUIRE( typeid(stationPtr->GetTrainPtrs()) == typeid(*expectedTypePtr) );
+  delete expectedTypePtr;
+  DeallocateStationPtr(stationPtr);
+}
+
+//############################################################################//
+
 
 // Using name "default"
 Station* BuildStation()

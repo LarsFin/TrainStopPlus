@@ -11,3 +11,9 @@ string Station::GetName()
 {
   return name;
 }
+
+// Getter for the list of Train Pointers
+list<Train*> Station::GetTrainPtrs()
+{
+  return trainPtrs;
+}

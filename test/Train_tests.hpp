@@ -11,6 +11,11 @@ Train* BuildTrain(string name);
 // Deallocate heap memory to avoid memory leaks
 void DeallocateTrainPtr(Train* tPtr);
 
+
+//############################################################################//
+// Train Tests
+//############################################################################//
+
 TEST_CASE( "Train is instantiated with passed name", "[Train]" )
 {
   string expectedName("SWR042");
@@ -25,6 +30,9 @@ TEST_CASE( "Train has moving bool which is initialised as false", "[Train]" )
   REQUIRE_FALSE( trainPtr->IsMoving() );
   DeallocateTrainPtr(trainPtr);
 }
+
+//############################################################################//
+
 
 // Allocate heap memory to local Train Object
 Train* BuildTrain()
