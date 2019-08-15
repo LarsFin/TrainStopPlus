@@ -21,5 +21,5 @@ bool Train::IsMoving()
 // Setter for state of motion of Train
 void Train::SetIsMoving(bool state)
 {
-
+  isMoving = state;
 }
