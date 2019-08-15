@@ -36,6 +36,8 @@ TEST_CASE( "Train can be set to move and stop", "[SetIsMoving]" )
   Train* trainPtr = BuildTrain();
   trainPtr->SetIsMoving(true);
   REQUIRE( trainPtr->IsMoving() );
+  trainPtr->SetIsMoving(false);
+  REQUIRE_FALSE( trainPtr->IsMoving() );
   DeallocateTrainPtr(trainPtr);
 }
 
