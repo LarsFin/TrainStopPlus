@@ -31,6 +31,14 @@ TEST_CASE( "Train has moving bool which is initialised as false", "[Train]" )
   DeallocateTrainPtr(trainPtr);
 }
 
+TEST_CASE( "Train can be set to move and stop", "[SetIsMoving]" )
+{
+  Train* trainPtr = BuildTrain();
+  trainPtr->SetIsMoving(true);
+  REQUIRE( trainPtr->IsMoving() );
+  DeallocateTrainPtr(trainPtr);
+}
+
 //############################################################################//
 
 
