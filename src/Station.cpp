@@ -17,3 +17,9 @@ list<Train*> Station::GetTrainPtrs()
 {
   return trainPtrs;
 }
+
+// Adds the passed train to 'trains' list of the station
+void Station::ReceiveTrain(Train* train)
+{
+  
+}

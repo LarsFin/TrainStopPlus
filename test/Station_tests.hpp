@@ -33,6 +33,17 @@ TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs
   DeallocateStationPtr(stationPtr);
 }
 
+TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
+{
+  Station* stationPtr = BuildStation();
+  Train* expectedTrain = new Train("x"); // This should and will be mocked out
+  stationPtr->ReceiveTrain(expectedTrain);
+  REQUIRE( stationPtr->GetTrainPtrs().size() == 1 );
+  REQUIRE( stationPtr->GetTrainPtrs().front() == expectedTrain );
+  delete expectedTrain; // Destructor of Station should handle now
+  DeallocateStationPtr(stationPtr);
+}
+
 //############################################################################//
 
 
