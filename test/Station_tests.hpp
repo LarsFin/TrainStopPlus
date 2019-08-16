@@ -28,7 +28,7 @@ TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs
 {
   Station* stationPtr = BuildStation();
   list<Train*>* expectedTypePtr = new list<Train*>;
-  REQUIRE( typeid(stationPtr->GetTrainPtrs()) == typeid(*expectedTypePtr) );
+  REQUIRE( typeid(stationPtr->GetTrainPtrs()) == typeid(expectedTypePtr) );
   delete expectedTypePtr;
   DeallocateStationPtr(stationPtr);
 }
@@ -37,10 +37,10 @@ TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
 {
   Station* stationPtr = BuildStation();
   Train* expectedTrain = new Train("x"); // This should and will be mocked out
+  REQUIRE( stationPtr->GetTrainPtrs()->empty() ); // Station is empty
   stationPtr->ReceiveTrain(expectedTrain);
-  REQUIRE( stationPtr->GetTrainPtrs().size() == 1 );
-  REQUIRE( stationPtr->GetTrainPtrs().front() == expectedTrain );
-  delete expectedTrain; // Destructor of Station should handle now
+  REQUIRE( stationPtr->GetTrainPtrs()->size() == 1 ); // Station is not empty with 1 train
+  REQUIRE( stationPtr->GetTrainPtrs()->front() == expectedTrain ); // Train in station is the one which was passed
   DeallocateStationPtr(stationPtr);
 }
 

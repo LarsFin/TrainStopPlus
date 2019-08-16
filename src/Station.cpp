@@ -4,6 +4,17 @@
 Station::Station(string name)
 {
   this->name = name;
+  trainPtrs = new list<Train*>;
+}
+
+// Station Destructor
+Station::~Station()
+{
+  for (Train* t : *trainPtrs)
+  {
+    delete t;
+  }
+  delete trainPtrs;
 }
 
 // Getter for the name attribute
@@ -13,7 +24,7 @@ string Station::GetName()
 }
 
 // Getter for the list of Train Pointers
-list<Train*> Station::GetTrainPtrs()
+list<Train*>* Station::GetTrainPtrs()
 {
   return trainPtrs;
 }
@@ -21,5 +32,5 @@ list<Train*> Station::GetTrainPtrs()
 // Adds the passed train to 'trains' list of the station
 void Station::ReceiveTrain(Train* train)
 {
-  
+
 }
