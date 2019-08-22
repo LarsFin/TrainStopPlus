@@ -1,5 +1,7 @@
 #define Station_H
 
+#include <exception>
+
 using namespace std;
 
 class Station

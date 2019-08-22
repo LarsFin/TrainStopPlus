@@ -9,9 +9,6 @@ using namespace fakeit;
 Station* BuildStation();
 Station* BuildStation(string name);
 
-// Methods for building faked trains
-Train* BuildFakeMovingTrain();
-
 // Deallocate heap pointer
 void DeallocateStationPtr(Station* stationPtr);
 
@@ -40,13 +37,28 @@ TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs
 TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
 {
   Station* stationPtr = BuildStation();
+
   Mock<Train> mock;
-  Train& mockTrain = mock.get();
-  Train* mockTrainPtr = &mockTrain;
+  When(Method(mock,IsMoving)).Return(true);
+  Train* mockTrainPtr = &(mock.get());
+
   REQUIRE( stationPtr->GetTrainPtrs()->empty() ); // Station is empty
   stationPtr->ReceiveTrain(mockTrainPtr);
   REQUIRE( stationPtr->GetTrainPtrs()->size() == 1 ); // Station is not empty with 1 train
   REQUIRE( stationPtr->GetTrainPtrs()->front() == mockTrainPtr ); // Train in station is the one which was passed
+  DeallocateStationPtr(stationPtr);
+}
+
+TEST_CASE( "Station cannot receive non moving train", "[ReceiveTrain]" )
+{
+  Station* stationPtr = BuildStation();
+
+  Mock<Train> mock;
+  When(Method(mock,IsMoving)).Return(false);
+  Train* mockTrainPtr = &(mock.get());
+
+  REQUIRE_THROWS_WITH( stationPtr->ReceiveTrain(mockTrainPtr), "Station cannot receive non moving train" );
+  REQUIRE( stationPtr->GetTrainPtrs()->empty() );
   DeallocateStationPtr(stationPtr);
 }
 
@@ -65,12 +77,6 @@ Station* BuildStation(string name)
 {
   Station* stationPtr = new Station(name);
   return stationPtr;
-}
-
-// Returns a faked train
-Train* BuildFakeMovingTrain()
-{
-  return new Train("~");
 }
 
 // Deallocate Station pointer
