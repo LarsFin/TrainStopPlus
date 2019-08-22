@@ -1,2 +1,5 @@
 # Ignore binary directory!
 /bin/
+
+# Ignore expanded fake_it header file
+*/fake_it.hpp

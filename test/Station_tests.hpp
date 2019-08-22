@@ -3,10 +3,14 @@
 #include "../src/Station.cpp"
 
 using namespace std;
+using namespace fakeit;
 
 // Overload station builds for name set and not
 Station* BuildStation();
 Station* BuildStation(string name);
+
+// Methods for building faked trains
+Train* BuildFakeMovingTrain();
 
 // Deallocate heap pointer
 void DeallocateStationPtr(Station* stationPtr);
@@ -36,11 +40,13 @@ TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs
 TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
 {
   Station* stationPtr = BuildStation();
-  Train* expectedTrain = new Train("x"); // This should and will be mocked out
+  Mock<Train> mock;
+  Train& mockTrain = mock.get();
+  Train* mockTrainPtr = &mockTrain;
   REQUIRE( stationPtr->GetTrainPtrs()->empty() ); // Station is empty
-  stationPtr->ReceiveTrain(expectedTrain);
+  stationPtr->ReceiveTrain(mockTrainPtr);
   REQUIRE( stationPtr->GetTrainPtrs()->size() == 1 ); // Station is not empty with 1 train
-  REQUIRE( stationPtr->GetTrainPtrs()->front() == expectedTrain ); // Train in station is the one which was passed
+  REQUIRE( stationPtr->GetTrainPtrs()->front() == mockTrainPtr ); // Train in station is the one which was passed
   DeallocateStationPtr(stationPtr);
 }
 
@@ -59,6 +65,12 @@ Station* BuildStation(string name)
 {
   Station* stationPtr = new Station(name);
   return stationPtr;
+}
+
+// Returns a faked train
+Train* BuildFakeMovingTrain()
+{
+  return new Train("~");
 }
 
 // Deallocate Station pointer

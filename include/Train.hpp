@@ -6,6 +6,7 @@ class Train
 {
 public:
   Train(string name);
+  virtual ~Train() {}; // Made virtual for mocking
 
   // Getter signatures
   string GetName();

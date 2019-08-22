@@ -62,10 +62,10 @@ To make sure trains park within the station,
 Stations should only take Trains on a journey.
 ```
 
-Trains received by Stations should have their journies stopped [ ]
+Trains received by Stations should have their journeys stopped [ ]
 ```
 As a Train Manager,
-So passengers can easily dissembark,
+So passengers can easily disembark,
 Trains should be stopped at Stations.
 ```
 
@@ -87,7 +87,7 @@ Trains which depart from Stations should begin their journey [ ]
 ```
 As a Train Manager,
 So I can make it on time to my destinations,
-Train journies should be started when leaving a station.
+Train journeys should be started when leaving a station.
 ```
 
 Stations can only release stopped trains [ ]
