@@ -42,6 +42,7 @@ TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
 
   Mock<ITrain> mock;
   When(Method(mock,IsMoving)).Return(true);
+  Fake(Method(mock,SetIsMoving));
   ITrain* mockTrainPtr = &(mock.get());
 
   REQUIRE( stationPtr->GetTrainPtrs()->empty() ); // Station is empty
@@ -62,6 +63,19 @@ TEST_CASE( "Station cannot receive non moving train", "[ReceiveTrain]" )
   REQUIRE_THROWS_WITH( stationPtr->ReceiveTrain(mockTrainPtr), "Station cannot receive stationary train" );
   REQUIRE( stationPtr->GetTrainPtrs()->empty() );
   DeallocateStationPtr(stationPtr);
+}
+
+TEST_CASE( "Trains received by station should be stopped", "[ReceiveTrain]" )
+{
+  Station* stationPtr = BuildStation();
+
+  Mock<ITrain> mock;
+  When(Method(mock,IsMoving)).Return(true);
+  Fake(Method(mock,SetIsMoving));
+  ITrain* mockTrainPtr = &(mock.get());
+
+  stationPtr->ReceiveTrain(mockTrainPtr);
+  Verify(Method(mock,SetIsMoving).Using(false)).Once();
 }
 
 //############################################################################//
