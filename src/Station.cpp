@@ -35,6 +35,7 @@ void Station::ReceiveTrain(ITrain* train)
   if (train->IsMoving())
   {
     trainPtrs->push_back(train);
+    train->SetIsMoving(false);
   }
   else
   {

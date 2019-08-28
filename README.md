@@ -55,14 +55,14 @@ So I can enter a station by train,
 Stations should have an effective method by which to receive trains.
 ```
 
-Stations can only receive trains on a journey [ ]
+Stations can only receive trains on a journey [✓]
 ```
 As a Station Manager,
 To make sure trains park within the station,
 Stations should only take Trains on a journey.
 ```
 
-Trains received by Stations should have their journeys stopped [ ]
+Trains received by Stations should have their journeys stopped [✓]
 ```
 As a Train Manager,
 So passengers can easily disembark,
