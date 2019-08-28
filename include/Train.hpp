@@ -10,7 +10,7 @@ public:
 
   // Getter signatures
   string GetName();
-  bool IsMoving();
+  virtual bool IsMoving();
 
   // Setter signatures
   void SetIsMoving(bool moving);

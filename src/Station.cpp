@@ -32,5 +32,12 @@ list<Train*>* Station::GetTrainPtrs()
 // Adds the passed train to 'trains' list of the station
 void Station::ReceiveTrain(Train* train)
 {
-  trainPtrs->push_back(train);
+  if (train->IsMoving())
+  {
+    trainPtrs->push_back(train);
+  }
+  else
+  {
+    throw "Station cannot receive stationary train";
+  }
 }

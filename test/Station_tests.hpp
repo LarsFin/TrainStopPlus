@@ -2,6 +2,8 @@
 
 #include "../src/Station.cpp"
 
+#include "iostream"
+
 using namespace std;
 using namespace fakeit;
 
@@ -57,7 +59,7 @@ TEST_CASE( "Station cannot receive non moving train", "[ReceiveTrain]" )
   When(Method(mock,IsMoving)).Return(false);
   Train* mockTrainPtr = &(mock.get());
 
-  REQUIRE_THROWS_WITH( stationPtr->ReceiveTrain(mockTrainPtr), "Station cannot receive non moving train" );
+  REQUIRE_THROWS_WITH( stationPtr->ReceiveTrain(mockTrainPtr), "Station cannot receive stationary train" );
   REQUIRE( stationPtr->GetTrainPtrs()->empty() );
   DeallocateStationPtr(stationPtr);
 }
