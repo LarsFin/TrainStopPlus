@@ -1,16 +1,18 @@
 #define Train_H
 
+#include "ITrain.hpp"
+
 using namespace std;
 
-class Train
+class Train : public ITrain
 {
 public:
   Train(string name);
-  virtual ~Train() {}; // Made virtual for mocking
+  ~Train() {};
 
   // Getter signatures
   string GetName();
-  virtual bool IsMoving();
+  bool IsMoving();
 
   // Setter signatures
   void SetIsMoving(bool moving);

@@ -30,7 +30,7 @@ TEST_CASE( "Station is instantiated with passed name", "[Station]" )
 TEST_CASE( "Station is instantiated with list of train pointers", "[GetTrainPtrs]" )
 {
   Station* stationPtr = BuildStation();
-  list<Train*>* expectedTypePtr = new list<Train*>;
+  list<ITrain*>* expectedTypePtr = new list<ITrain*>;
   REQUIRE( typeid(stationPtr->GetTrainPtrs()) == typeid(expectedTypePtr) );
   delete expectedTypePtr;
   DeallocateStationPtr(stationPtr);
@@ -40,9 +40,9 @@ TEST_CASE( "Station can receive train", "[ReceiveTrain]" )
 {
   Station* stationPtr = BuildStation();
 
-  Mock<Train> mock;
+  Mock<ITrain> mock;
   When(Method(mock,IsMoving)).Return(true);
-  Train* mockTrainPtr = &(mock.get());
+  ITrain* mockTrainPtr = &(mock.get());
 
   REQUIRE( stationPtr->GetTrainPtrs()->empty() ); // Station is empty
   stationPtr->ReceiveTrain(mockTrainPtr);
@@ -55,9 +55,9 @@ TEST_CASE( "Station cannot receive non moving train", "[ReceiveTrain]" )
 {
   Station* stationPtr = BuildStation();
 
-  Mock<Train> mock;
+  Mock<ITrain> mock;
   When(Method(mock,IsMoving)).Return(false);
-  Train* mockTrainPtr = &(mock.get());
+  ITrain* mockTrainPtr = &(mock.get());
 
   REQUIRE_THROWS_WITH( stationPtr->ReceiveTrain(mockTrainPtr), "Station cannot receive stationary train" );
   REQUIRE( stationPtr->GetTrainPtrs()->empty() );

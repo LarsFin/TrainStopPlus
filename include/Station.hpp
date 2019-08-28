@@ -1,10 +1,11 @@
 #define Station_H
 
 #include <exception>
+#include "IStation.hpp"
 
 using namespace std;
 
-class Station
+class Station : public IStation
 {
 public:
   Station(string name);
@@ -12,12 +13,12 @@ public:
 
   // Getter signatures
   string GetName();
-  list<Train*>* GetTrainPtrs(); // Should probably be a pointer to a list
+  list<ITrain*>* GetTrainPtrs();
 
   // Receive train
-  void ReceiveTrain(Train* train);
+  void ReceiveTrain(ITrain* train);
 
 private:
   string name;
-  list<Train*>* trainPtrs;
+  list<ITrain*>* trainPtrs;
 };
