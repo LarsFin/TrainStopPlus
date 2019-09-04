@@ -54,9 +54,12 @@ ITrain* Station::ReleaseTrain(string trainName)
     {
       releasedTrain = t;
       trainPtrs->remove(releasedTrain);
-      break;
+      return releasedTrain;
     }
   }
 
-  return releasedTrain;
+  stringstream exceptionMessage;
+  exceptionMessage << "The train " << trainName << " does not exist within the station";
+
+  throw exceptionMessage.str();
 }

@@ -109,7 +109,7 @@ TEST_CASE( "Cannot release trains which aren't at the station", "[ReleaseTrain]"
   string nonExistantTrainName = "non-existant-train";
 
   stringstream ss;
-  ss << "The train " << nonExistantTrainName << "does not exist within the station";
+  ss << "The train " << nonExistantTrainName << " does not exist within the station";
 
   REQUIRE_THROWS_WITH( stationPtr->ReleaseTrain(nonExistantTrainName), ss.str() );
 }
