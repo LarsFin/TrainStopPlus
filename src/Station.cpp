@@ -44,7 +44,19 @@ void Station::ReceiveTrain(ITrain* train)
 }
 
 // Receiving a string name as an argument, it determines the train to release
-ITrain* Station::ReleaseTrain(string name)
+ITrain* Station::ReleaseTrain(string trainName)
 {
-  return new Train("place-holder");
+  ITrain* releasedTrain;
+
+  for (ITrain* t : *trainPtrs)
+  {
+    if (t->GetName() == trainName)
+    {
+      releasedTrain = t;
+      trainPtrs->remove(releasedTrain);
+      break;
+    }
+  }
+
+  return releasedTrain;
 }
