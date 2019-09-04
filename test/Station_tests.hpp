@@ -99,6 +99,19 @@ TEST_CASE( "Trains can leave stations", "[ReleaseTrain]" )
 
   REQUIRE( stationPtr->GetTrainPtrs()->empty() );
   REQUIRE( releasedTrain == mockTrainPtr );
+
+  DeallocateStationPtr(stationPtr);
+}
+
+TEST_CASE( "Cannot release trains which aren't at the station", "[ReleaseTrain]" )
+{
+  Station* stationPtr = BuildStation();
+  string nonExistantTrainName = "non-existant-train";
+
+  stringstream ss;
+  ss << "The train " << nonExistantTrainName << "does not exist within the station";
+
+  REQUIRE_THROWS_WITH( stationPtr->ReleaseTrain(nonExistantTrainName), ss.str() );
 }
 
 //############################################################################//
