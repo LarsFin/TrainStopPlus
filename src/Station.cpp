@@ -42,3 +42,9 @@ void Station::ReceiveTrain(ITrain* train)
     throw "Station cannot receive stationary train";
   }
 }
+
+// Receiving a string name as an argument, it determines the train to release
+ITrain* Station::ReleaseTrain(string name)
+{
+  return new Train("place-holder");
+}

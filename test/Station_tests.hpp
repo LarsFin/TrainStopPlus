@@ -76,6 +76,29 @@ TEST_CASE( "Trains received by station should be stopped", "[ReceiveTrain]" )
 
   stationPtr->ReceiveTrain(mockTrainPtr);
   Verify(Method(mock,SetIsMoving).Using(false)).Once();
+  DeallocateStationPtr(stationPtr);
+}
+
+TEST_CASE( "Trains can leave stations", "[ReleaseTrain]" )
+{
+  Station* stationPtr = BuildStation();
+  string mockTrainName = "mock-train";
+
+  Mock<ITrain> mock;
+  When(Method(mock,IsMoving)).Return(true);
+  Fake(Method(mock,SetIsMoving));
+  ITrain* mockTrainPtr = &(mock.get());
+
+  stationPtr->ReceiveTrain(mockTrainPtr);
+  REQUIRE( stationPtr->GetTrainPtrs()->size() == 1 );
+
+  When(Method(mock,IsMoving)).Return(false);
+  When(Method(mock,GetName)).Return(mockTrainName);
+
+  ITrain* releasedTrain = stationPtr->ReleaseTrain(mockTrainName);
+
+  REQUIRE( stationPtr->GetTrainPtrs()->empty() );
+  REQUIRE( releasedTrain == mockTrainPtr );
 }
 
 //############################################################################//

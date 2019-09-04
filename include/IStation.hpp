@@ -14,4 +14,5 @@ public:
 
   // Receive train
   virtual void ReceiveTrain(ITrain* train) = 0;
+  virtual ITrain* ReleaseTrain(string name) = 0;
 };

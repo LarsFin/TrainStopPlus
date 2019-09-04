@@ -17,6 +17,7 @@ public:
 
   // Receive train
   void ReceiveTrain(ITrain* train);
+  ITrain* ReleaseTrain(string name);
 
 private:
   string name;
