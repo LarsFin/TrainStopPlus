@@ -112,6 +112,31 @@ TEST_CASE( "Cannot release trains which aren't at the station", "[ReleaseTrain]"
   ss << "The train " << nonExistantTrainName << " does not exist within the station";
 
   REQUIRE_THROWS_WITH( stationPtr->ReleaseTrain(nonExistantTrainName), ss.str() );
+
+  DeallocateStationPtr(stationPtr);
+}
+
+TEST_CASE( "Trains which depart from Stations should begin their journey", "[ReleaseTrain]" )
+{
+  Station* stationPtr = BuildStation();
+  string mockTrainName = "mock-train";
+
+  Mock<ITrain> mock;
+  When(Method(mock,IsMoving)).Return(true);
+  Fake(Method(mock,SetIsMoving));
+  ITrain* mockTrainPtr = &(mock.get());
+
+  stationPtr->ReceiveTrain(mockTrainPtr);
+  REQUIRE( stationPtr->GetTrainPtrs()->size() == 1 );
+
+  When(Method(mock,IsMoving)).Return(false);
+  When(Method(mock,GetName)).Return(mockTrainName);
+
+  stationPtr->ReleaseTrain(mockTrainName);
+
+  Verify(Method(mock,SetIsMoving).Using(true)).Once();
+
+  DeallocateStationPtr(stationPtr);
 }
 
 //############################################################################//
